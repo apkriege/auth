@@ -5,11 +5,11 @@
     angular.module('authApp').controller('HomeController', HomeController);
 
     function HomeController(){
-        let a = [];
-        for (let i = 0; i < 10; i++) {
-            let x = a[i];
-            console.log(i);
-        }
+        //let a = [];
+        //for (let i = 0; i < 10; i++) {
+        //    let x = a[i];
+        //    console.log(i);
+        //}
     }
 
     angular.module('authApp').controller('AuthController', AuthController);
