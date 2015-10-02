@@ -21,14 +21,14 @@ Route::any('{path?}', function () {
 //});
 
 Route::group(['prefix' => 'api'], function (){
-//    Route::group(['middleware' => 'jwt.auth'], function() {
-        Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
-//    });
 
+    Route::get('getPages', 'ApiController@getPages');
+    Route::get('editPage', 'ApiController@editPage');
+    Route::post('updatePage', 'ApiController@updatePage');
+
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
-
     Route::resource('signup', 'SignupController');
-
     Route::get('/testing', [ function () {
 
         // TODO: this will be it's own class
@@ -36,13 +36,7 @@ Route::group(['prefix' => 'api'], function (){
         $token = JWTAuth::getToken();
         $user = JWTAuth::toUser($token);
         return response()->json($user);
-//
-//
-//        return response()->json([
-//            'data' => ['email' => $user->email, 'registered_at' => $user->created_at->toDateTimeString()]
-//        ]);
 
-//            return response()->json('asdfasdf');
         }
     ]);
 });

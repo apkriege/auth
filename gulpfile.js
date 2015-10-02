@@ -1,4 +1,4 @@
-var elixir = require('laravel-elixir');
+//var elixir = require('laravel-elixir');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +11,18 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+//elixir(function(mix) {
+//    mix.sass('app.scss');
+//});
+
+var gulp = require('gulp');
+
+var files = [
+    'node_modules/**/*.*'
+];
+
+gulp.task('move', function(){
+  gulp.src(files, {base: './'}).pipe(gulp.dest('public/assets'));
 });
+
+gulp.task('default', ['move']);

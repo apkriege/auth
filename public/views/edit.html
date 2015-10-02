@@ -1,0 +1,33 @@
+<style type="text/css">
+    .ta-editor {
+        /*min-height: 300px;*/
+        height: auto;
+        overflow: auto;
+        font-family: inherit;
+        font-size: 100%;
+    }
+    .ta-toolbar{
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    #output p{
+        margin:0;
+    }
+</style>
+<div class="row">
+    <h1>Edit</h1>
+    <div id="htmleditor">
+        <h3>Title</h3>
+        <input type="text" class="form-control" ng-model="edit.update.title">
+        <h3>URL</h3>
+        <input type="text" class="form-control" ng-model="edit.update.url">
+        <h3>Content</h3>
+        <div text-angular="text-angular" name="htmlcontent" ng-model="edit.update.content" ta-disabled='disabled'></div>
+        <button class="btn btn-primary" ng-click="edit.sub(edit.update)" style="margin-top:10px">Summit</button>
+    </div>
+    <div id="output">
+        <h1 ng-bind-html="edit.update.title"></h1>
+        <p ng-bind-html="edit.update.content"></p>
+    </div>
+    {{}}
+</div>

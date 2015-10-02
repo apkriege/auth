@@ -5,3 +5,4 @@ Homestead.json
 /.idea
 .env
 composer.lock
+/public/assets/node_modules

@@ -1,0 +1,11 @@
+<div class="row">
+    <h1>Pages</h1>
+    <table class="table">
+        <tr ng-repeat="p in pages.pages">
+            <td>{{p.id}}</td>
+            <td style="width:200px"><a ng-href="/pages/{{p.url}}">{{p.title}}</a></td>
+            <td>{{p.content | htmlToPlainText}}</td>
+            <td><a ng-href="/pages/edit/{{p.id}}"><button class="btn btn-primary btn-sm">Edit</button></a></td>
+        </tr>
+    </table>
+</div>
