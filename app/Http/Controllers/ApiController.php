@@ -25,7 +25,8 @@ class ApiController extends controller {
 
         DB::table('pages')->where('id', '=', $data['id'])->update([
             'title' => $data['title'],
-            'content' => $data['content']
+            'content' => $data['content'],
+            'url' => $data['url']
         ]);
 
         return response()->json('data');

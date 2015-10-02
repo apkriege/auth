@@ -54,6 +54,7 @@
         }, 50);
 
         $scope.sub = function (d){
+            console.log(d);
             dataFactory.updatePage(d);
         }
     });

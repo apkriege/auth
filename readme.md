@@ -14,3 +14,19 @@ Edit your .env file to point at your DB. (copy the .evn.example and populate it 
 Run 'php artisan migrate' which will set up your tables 
 
 Run 'php artisan db:seed' which with populate your tables with dummy data
+
+## Resources
+
+##### Authentication
+https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps
+
+##### UI Router
+https://github.com/angular-ui/ui-router
+
+##### Satellizer Client Side JWT Token Management
+https://github.com/sahat/satellizer
+
+##### TextAngular
+https://github.com/fraywing/textAngular
+
+http://plnkr.co/edit/kKPfk0LCXWrMpZ1gkblb?p=preview

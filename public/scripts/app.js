@@ -34,7 +34,7 @@
 
             if(toState.login.auth == true && !$auth.isAuthenticated()){
                 event.preventDefault();
-                $state.go('auth', {notify: true});
+                $state.go('login', {notify: true});
                 console.log('not authorized');
             }
         });
