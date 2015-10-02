@@ -15,10 +15,14 @@
 //    mix.sass('app.scss');
 //});
 
+//works
 var gulp = require('gulp');
 
 var files = [
-    'node_modules/**/*.*'
+    'node_modules/**/*.*',
+    '!node_modules/bootstrap-sass/**',
+    '!node_modules/gulp/**',
+    '!node_modules/laravel-elixir/**'
 ];
 
 gulp.task('move', function(){
@@ -26,3 +30,4 @@ gulp.task('move', function(){
 });
 
 gulp.task('default', ['move']);
+

@@ -51,11 +51,4 @@
     <script src="http://textangular.com/dist/textAngular-rangy.min.js"></script>
     <script src="http://textangular.com/dist/textAngular-sanitize.min.js"></script>
     <script src="http://textangular.com/dist/textAngular.min.js"></script>
-    <script>
-        (function (){
-            setTimeout(function(){
-                $('.ta-toolbar').children().last().hide();
-            }, 50);
-        })();
-    </script>
 </html>

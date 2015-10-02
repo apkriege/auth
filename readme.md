@@ -7,7 +7,7 @@ Simple Authentication App and Basic CMS using Angular/Satellizer
 Make sure you have NodeJs installed globally.
 https://nodejs.org/en/
 
-With NodeJs installed run 'composer install' and 'npm install' and 'gulp'.
+With NodeJs installed run 'composer install' and 'npm install' and 'gulp' (takes a second to move files).
 
 Edit your .env file to point at your DB. (copy the .evn.example and populate it with the correct data)
 
