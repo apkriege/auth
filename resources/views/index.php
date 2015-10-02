@@ -24,10 +24,10 @@
                 <div class="row">
                     <ul class="nav navbar-nav">
                         <li><a ng-href="/">Home</a></li>
-                        <li><a ng-href="/login">Login</a></li>
-                        <li><a ng-href="/users">Users</a></li>
-                        <li><a ng-href="/sign">Sign Up</a></li>
                         <li><a ng-href="/pages">Pages</a></li>
+                        <li><a ng-href="/users">Users</a></li>
+                        <li><a ng-href="/login">Login</a></li>
+                        <li><a ng-href="/sign">Sign Up</a></li>
                     </ul>
                 </div>
             </div><!-- /.container-fluid -->

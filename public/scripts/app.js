@@ -115,6 +115,7 @@
     */
     authApp.factory('dataFactory', function ($http, $sessionStorage, $q){
         return {
+            // save all the pages in the $sessionStorage (is removed on browser close)
             setPages: function (){
                 return $q.all([
                     $http.get('/api/getPages').then(function (respsonse){
