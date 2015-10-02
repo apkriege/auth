@@ -23,11 +23,11 @@
             <div class="container">
                 <div class="row">
                     <ul class="nav navbar-nav">
-                        <li><a ui-sref="home">Home</a></li>
-                        <li><a ui-sref="auth">Login</a></li>
-                        <li><a ui-sref="users">Users</a></li>
-                        <li><a ui-sref="sign">Sign Up</a></li>
-                        <li><a ui-sref="pages">Pages</a></li>
+                        <li><a ng-href="/">Home</a></li>
+                        <li><a ng-href="/login">Login</a></li>
+                        <li><a ng-href="/users">Users</a></li>
+                        <li><a ng-href="/sign">Sign Up</a></li>
+                        <li><a ng-href="/pages">Pages</a></li>
                     </ul>
                 </div>
             </div><!-- /.container-fluid -->

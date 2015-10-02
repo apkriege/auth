@@ -18,16 +18,16 @@
     <h1>Edit</h1>
     <div id="htmleditor">
         <h3>Title</h3>
-        <input type="text" class="form-control" ng-model="edit.update.title">
+        <input type="text" class="form-control" ng-model="update.title">
         <h3>URL</h3>
-        <input type="text" class="form-control" ng-model="edit.update.url">
+        <input type="text" class="form-control" ng-model="update.url">
         <h3>Content</h3>
-        <div text-angular="text-angular" name="htmlcontent" ng-model="edit.update.content" ta-disabled='disabled'></div>
-        <button class="btn btn-primary" ng-click="edit.sub(edit.update)" style="margin-top:10px">Summit</button>
+        <div text-angular="text-angular" name="htmlcontent" ng-model="update.content" ta-disabled='disabled'></div>
+        <button class="btn btn-primary" ng-click="sub(edit.update)" style="margin-top:10px">Summit</button>
     </div>
     <div id="output">
-        <h1 ng-bind-html="edit.update.title"></h1>
-        <p ng-bind-html="edit.update.content"></p>
+        <h1 ng-bind-html="update.title"></h1>
+        <p ng-bind-html="update.content"></p>
     </div>
     {{}}
 </div>

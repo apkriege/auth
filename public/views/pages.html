@@ -1,7 +1,7 @@
 <div class="row">
     <h1>Pages</h1>
     <table class="table">
-        <tr ng-repeat="p in pages.pages">
+        <tr ng-repeat="p in pages">
             <td>{{p.id}}</td>
             <td style="width:200px"><a ng-href="/pages/{{p.url}}">{{p.title}}</a></td>
             <td>{{p.content | htmlToPlainText}}</td>

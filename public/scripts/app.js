@@ -9,12 +9,17 @@
         'filters'
     ]);
 
+    /*
+    * function that runs on app being loaded
+    * - on route change, checks for user authentication and sets 'login.auth' which is used below in the routes
+    *   to dynamically restrict routing
+    */
     authApp.run(function ($rootScope, $auth, $state, $http, $window, dataFactory) {
 
         dataFactory.setPages();
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            //console.log($auth.isAuthenticated());
+
             $rootScope.auth = $auth.isAuthenticated();
 
             //$http.get('/api/testing').success(function (data){
@@ -35,11 +40,15 @@
         });
     });
 
+
+    /*
+    * ROUTING MAGIC
+    *
+    */
     authApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $locationProvider){
 
         $authProvider.loginUrl = '/api/authenticate';
         $authProvider.signupUrl = '/api/signup';
-        //$authProvider.loginUrl = '/api/signup';
 
         $urlRouterProvider.otherwise('/404');
 
@@ -47,7 +56,7 @@
             .state('home', {
                 url: '/',
                 templateUrl: '../views/home.html',
-                controller: 'HomeController as home',
+                controller: 'HomeController',
                 resolve: {
                     setData: function (dataFactory) {
                         return dataFactory.setPages();
@@ -57,38 +66,38 @@
             .state('pages', {
                 url: '/pages',
                 templateUrl: '../views/pages.html',
-                controller: 'PagesController as pages'
+                controller: 'PagesController'
             })
             .state('page', {
                 url: '/pages/:id',
                 templateUrl: '../views/page.html',
-                controller: 'PageController as page'
+                controller: 'PageController'
             })
             .state('edit', {
                 url:'/pages/edit/:id',
                 templateUrl: '../views/edit.html',
-                controller: 'EditController as edit',
+                controller: 'EditController',
                 resolve: {
                     page: function (dataFactory, $stateParams) {
                         return dataFactory.editPage($stateParams.id);
                     }
                 }
             })
-            .state('auth', {
-                url: '/auth',
-                templateUrl: '../views/authView.html',
-                controller: 'AuthController as auth'
-            })
             .state('users', {
                 url: '/users',
-                templateUrl: '../views/userView.html',
-                controller: 'UserController as user',
-                login: {auth: true}
+                templateUrl: '../views/user.html',
+                controller: 'UserController',
+                login: {auth: true}  // setting this to true means user has to be logged in
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: '../views/login.html',
+                controller: 'LoginController as login'
             })
             .state('sign', {
                 url:'/sign',
-                templateUrl: '../views/signView.html',
-                controller: 'SignController as sign'
+                templateUrl: '../views/signup.html',
+                controller: 'SignupController as signup'
             })
             .state('404', {
                 url: '/404',
@@ -98,6 +107,12 @@
         $locationProvider.html5Mode(true);
     });
 
+
+    /*
+    * DATA FACTORY
+    * all my http requests that are used in routing
+    * $q.all(array) allows multiple ajax calls
+    */
     authApp.factory('dataFactory', function ($http, $sessionStorage, $q){
         return {
             setPages: function (){
@@ -124,6 +139,10 @@
 
     });
 
+    /*
+    * ANGULAR FILTER MODULE
+    * filter used to strip tags from page content
+    */
     angular.module('filters', [])
         .filter('htmlToPlainText', function (){
             return function (text){

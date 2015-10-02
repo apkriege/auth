@@ -2,53 +2,93 @@
 
     'use strict';
 
-    angular.module('authApp').controller('HomeController', function ($sessionStorage){
-        var x = this;
+    /*
+    *   HOME CONTROLLER
+    *   All this does is grab the home page data and displays it ('/views/home.html')
+    */
+    angular.module('authApp').controller('HomeController', function ($scope, $sessionStorage){
         var test = $sessionStorage.pages.filter(function (el){
             return el.url == 'home';
         });
-        x.home = test[0];
+        $scope.home = test[0];
     });
 
-    angular.module('authApp').controller('PagesController', function ($sessionStorage) {
-        var x = this;
-        x.pages = $sessionStorage.pages;
+    /*
+     *   PAGES CONTROLLER
+     *   Displays a list of the pages
+     *   ('/views/pages.html')
+     */
+    angular.module('authApp').controller('PagesController', function ($scope, $sessionStorage) {
+        $scope.pages = $sessionStorage.pages;
 
     });
 
-    angular.module('authApp').controller('PageController', function ($sessionStorage, $stateParams, $state){
-        var x = this;
+    /*
+     *   PAGE CONTROLLER
+     *   Displays the pages based on url, if non found 404s
+     *   ('/views/page.html')
+     */
+    angular.module('authApp').controller('PageController', function ($scope, $sessionStorage, $stateParams, $state){
         var test = $sessionStorage.pages.filter(function (el){
             return el.url == $stateParams.id;
         });
+
         if(test[0]){
-            x.page = test[0];
+            $scope.page = test[0];
         }
         else{
             $state.go('404');
         }
     });
 
-    angular.module('authApp').controller('EditController', function ($sessionStorage, $timeout, page, dataFactory) {
-        var x = this;
-        x.update = page[0];
+    /*
+     *   EDIT CONTROLLER
+     *   All this does is grab the home page data and displays it
+     *   ('/edit/home.html')
+     */
+    angular.module('authApp').controller('EditController', function ($scope, $sessionStorage, $timeout, page, dataFactory) {
+        $scope.update = page[0];
 
         $timeout(function (){
             angular.element('.ta-toolbar').children().last().hide();
         }, 50);
 
-        x.sub = function (d){
+        $scope.sub = function (d){
             dataFactory.updatePage(d);
         }
     });
 
-    angular.module('authApp').controller('AuthController', function ($auth, $state) {
-        var vm = this;
+    /*
+     *   USER CONTROLLER
+     *   Click the button and displays a list of all the users
+     *   ('/views/user.html')
+     */
+    angular.module('authApp').controller('UserController', function ($scope, $http) {
 
-        vm.login = function() {
+        $scope.getUsers = function() {
+            $http.get('api/authenticate').success(function(users) {
+                console.log(users);
+                $scope.users = users;
+            }).error(function(error) {
+                $scope.error = error;
+            })
+        }
+
+    });
+
+    /*
+     *   LOGIN CONTROLLER
+     *   Allows user to login and then redirects them to users
+     *   ('/views/login.html')
+     *   * currently just 401 errors if creds don't match
+     */
+    angular.module('authApp').controller('LoginController', function ($auth, $state) {
+        var log = this;
+
+        log.login = function() {
             var credentials = {
-                email: vm.email,
-                password: vm.password
+                email: log.email,
+                password: log.password
             };
 
             $auth.login(credentials).then(function (data){
@@ -57,44 +97,28 @@
         }
     });
 
+    /*
+     *   SIGNUP CONTROLLER
+     *   Allows a new user to sing up which then redirects the user to the login page
+     *   ('/views/signup.html')
+     */
+    angular.module('authApp').controller('SignupController', function ($auth, $state){
+        var x = this;
 
-    angular.module('authApp').controller('SignController', function ($auth, $state, $rootScope){
-        var ak = this;
-
-        ak.signup = function() {
+        x.signup = function() {
             var credentials = {
-                name: ak.name,
-                email: ak.email,
-                password: ak.password
+                name: x.name,
+                email: x.email,
+                password: x.password
             };
 
             console.log(credentials);
 
             $auth.signup(credentials).then(function (data){
-                //$auth.setToken(data)
                 $state.go('auth', {});
             })
         }
     });
 
 
-    angular.module('authApp').controller('UserController', UserController);
-
-    function UserController($http) {
-
-        var vm = this;
-
-        vm.users;
-        vm.error;
-
-        vm.getUsers = function() {
-            $http.get('api/authenticate').success(function(users) {
-                console.log(users);
-                vm.users = users;
-            }).error(function(error) {
-                vm.error = error;
-            })
-        }
-
-    }
 })();
